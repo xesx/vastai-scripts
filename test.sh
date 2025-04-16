@@ -4,7 +4,7 @@ source /venv/main/bin/activate
 COMFYUI_DIR=${WORKSPACE}/ComfyUI
 
 RCLONE_CONFIG_DIR="${HOME}/.config/rclone"
-RCLONE_CONFIG_FILE="${CONFIG_DIR}/rclone.conf"
+RCLONE_CONFIG_FILE="${RCLONE_CONFIG_DIR}/rclone.conf"
 
 # Packages are installed after nodes so we can fix them...
 
@@ -48,7 +48,7 @@ ESRGAN_MODELS=(
 CONTROLNET_MODELS=(
 )
 
-
+mkdir -p "${RCLONE_CONFIG_DIR}"
 cat > "${RCLONE_CONFIG_FILE}" <<EOF
 [ydisk]
 type = yandex
