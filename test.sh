@@ -3,6 +3,9 @@
 source /venv/main/bin/activate
 COMFYUI_DIR=${WORKSPACE}/ComfyUI
 
+RCLONE_CONFIG_DIR="${HOME}/.config/rclone"
+RCLONE_CONFIG_FILE="${CONFIG_DIR}/rclone.conf"
+
 # Packages are installed after nodes so we can fix them...
 
 APT_PACKAGES=(
@@ -46,7 +49,7 @@ CONTROLNET_MODELS=(
 )
 
 
-cat > "${CONFIG_FILE}" <<EOF
+cat > "${RCLONE_CONFIG_FILE}" <<EOF
 [ydisk]
 type = yandex
 token = {"access_token":"$YANDEX_DISK_TOKEN","token_type":"OAuth","refresh_token":""}
@@ -101,7 +104,7 @@ function provisioning_get_pip_packages() {
 function provisioning_get_nodes() {
     for repo in "${NODES[@]}"; do
         dir="${repo##*/}"
-        path="${COMFYUI_DIR}custom_nodes/${dir}"
+        path="${COMFYUI_DIR}/custom_nodes/${dir}"
         requirements="${path}/requirements.txt"
         if [[ -d $path ]]; then
             if [[ ${AUTO_UPDATE,,} != "false" ]]; then
