@@ -23,6 +23,9 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_essentials"
     "https://github.com/crystian/ComfyUI-Crystools"
     "https://github.com/twri/sdxl_prompt_styler"
+    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
+    "https://github.com/rgthree/rgthree-comfy"
+    "https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet"
 )
 
 WORKFLOWS=(
