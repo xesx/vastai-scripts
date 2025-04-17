@@ -56,6 +56,8 @@ token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refres
 
 EOF
 
+sudo apt install fzf
+
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
