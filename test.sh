@@ -29,8 +29,8 @@ WORKFLOWS=(
 )
 
 CHECKPOINT_MODELS=(
-    "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/274039?type=Model&format=SafeTensor&size=pruned&fp=fp16" # https://civitai.com/models/46422/juggernaut
+    # "https://civitai.com/api/download/models/798204?type=Model&format=SafeTensor&size=full&fp=fp16"
+    # "https://civitai.com/api/download/models/274039?type=Model&format=SafeTensor&size=pruned&fp=fp16" # https://civitai.com/models/46422/juggernaut
 )
 
 UNET_MODELS=(
@@ -52,13 +52,8 @@ mkdir -p "${RCLONE_CONFIG_DIR}"
 cat > "${RCLONE_CONFIG_FILE}" <<EOF
 [ydisk]
 type = yandex
-token = {"access_token":"invalid","token_type":"OAuth","refresh_token":"$YANDEX_DISK_REFRESH_TOKEN","expiry":"2000-01-01T10:00:00.000000+03:00"}
+token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refresh_token":"$YANDEX_DISK_REFRESH_TOKEN","expiry":"2025-04-15T14:11:36.588423+03:00"}
 
-[gdrive]
-type = drive
-scope = drive
-token = {"access_token":"invalid","token_type":"Bearer","refresh_token":"$GOOGLE_DRIVE_REFRESH_TOKEN","expiry":"2000-01-01T10:00:00.000000+03:00"}
-team_drive =
 EOF
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
