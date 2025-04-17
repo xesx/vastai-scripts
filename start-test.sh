@@ -36,6 +36,8 @@ token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refres
 
 EOF
 
+git pull https://github.com/xesx/vastai-scripts.git
+
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
