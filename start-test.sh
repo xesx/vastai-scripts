@@ -45,20 +45,17 @@ function provisioning_start() {
     provisioning_get_nodes
     provisioning_get_pip_packages
     provisioning_print_end
-
-    # copy workflows and node templates
-    rclone copy -P ydisk:comfyui-link-source/user ${COMFYUI_DIR}/user
 }
 
 function provisioning_get_apt_packages() {
     if [[ -n $APT_PACKAGES ]]; then
-            sudo $APT_INSTALL ${APT_PACKAGES[@]}
+            sudo apt install "${APT_PACKAGES[@]}"
     fi
 }
 
 function provisioning_get_pip_packages() {
     if [[ -n $PIP_PACKAGES ]]; then
-            pip install --no-cache-dir ${PIP_PACKAGES[@]}
+            pip install --no-cache-dir "${PIP_PACKAGES[@]}"
     fi
 }
 
