@@ -2,25 +2,50 @@
 set -e
 
 REMOTE="ydisk"
-REMOTE_PATH="comfyui-link-source/models/checkpoints/"
-LOCAL_DEST="/workspace/ComfyUI/models/checkpoints/"
+BASE_REMOTE_PATH="comfyui-link-source/models/"
+LOCAL_DEST="/workspace/ComfyUI/models/"
 
-echo "📂 Получаем список файлов с Яндекс.Диска..."
+echo "📁 Сканируем доступные папки..."
 
-# Получаем список файлов (только файлы, не папки)
-mapfile -t FILES < <(rclone lsf -R "${REMOTE}:${REMOTE_PATH}" --files-only)
+# Получаем список подкаталогов внутри BASE_REMOTE_PATH (без файлов)
+FOLDERS=()
+while IFS= read -r line; do
+  FOLDERS+=("${line%/}") # убираем / с конца
+done < <(rclone lsf "${REMOTE}:${BASE_REMOTE_PATH}" --dirs-only)
 
-if [[ ${#FILES[@]} -eq 0 ]]; then
-  echo "❌ Нет доступных файлов на ${REMOTE}:${REMOTE_PATH}"
+if [[ ${#FOLDERS[@]} -eq 0 ]]; then
+  echo "❌ Нет папок в ${REMOTE}:${BASE_REMOTE_PATH}"
   exit 1
 fi
 
-# fzf мультиселект
-# SELECTED_FILES=$(printf '%s\n' "${FILES[@]}" | fzf --multi --prompt="Выбери файлы: " --header="⇧↑↓⇩ Space — выбрать, Enter — скачать")
+# Выбор папки через fzf
+SELECTED_FOLDER=$(printf '%s\n' "${FOLDERS[@]}" | \
+  fzf --prompt="📂 Выбери папку: " --header="Enter — открыть папку" --reverse)
+
+if [[ -z "$SELECTED_FOLDER" ]]; then
+  echo "🚪 Отменено пользователем."
+  exit 0
+fi
+
+REMOTE_PATH="${BASE_REMOTE_PATH}${SELECTED_FOLDER}/"
+echo "📂 Открыта папка: ${REMOTE_PATH}"
+
+# Получаем список всех файлов (рекурсивно) внутри выбранной папки
+FILES=()
+while IFS= read -r line; do
+  FILES+=("$line")
+done < <(rclone lsf -R "${REMOTE}:${REMOTE_PATH}" --files-only)
+
+if [[ ${#FILES[@]} -eq 0 ]]; then
+  echo "❌ Нет файлов в ${REMOTE}:${REMOTE_PATH}"
+  exit 1
+fi
+
+# Выбор файлов (с сохранением вложенности)
 SELECTED_FILES=$(printf '%s\n' "${FILES[@]}" | \
   fzf --multi --ansi --marker='++' \
-      --prompt="Выбери файлы: " \
-      --header="⇧↑↓⇩ Space — выбрать, Enter — скачать" \
+      --prompt="📄 Выбери файлы: " \
+      --header="⇧↑↓ Tab — выбрать, Enter — скачать" \
       --reverse)
 
 if [[ -z "$SELECTED_FILES" ]]; then
@@ -28,11 +53,13 @@ if [[ -z "$SELECTED_FILES" ]]; then
   exit 0
 fi
 
-echo "⬇️ Загружаем выбранные файлы..."
+echo "⬇️ Загружаем выбранные файлы с сохранением структуры..."
 
 while IFS= read -r FILE; do
-  echo "📥 $FILE"
-  rclone copy -P "${REMOTE}:${REMOTE_PATH}${FILE}" "${LOCAL_DEST}"
+  SRC="${REMOTE}:${REMOTE_PATH}${FILE}"
+  DEST="${LOCAL_DEST}${SELECTED_FOLDER}/${FILE%/*}" # путь без имени файла
+  echo "📥 $SRC → $DEST/"
+  rclone copy -P "$SRC" "$DEST/"
 done <<< "$SELECTED_FILES"
 
 echo "✅ Загрузка завершена!"
