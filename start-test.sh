@@ -33,10 +33,12 @@ cat > "${RCLONE_CONFIG_FILE}" <<EOF
 [ydisk]
 type = yandex
 token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refresh_token":"$YANDEX_DISK_REFRESH_TOKEN","expiry":"2025-04-15T14:11:36.588423+03:00"}
-
 EOF
 
 git clone https://github.com/xesx/vastai-scripts.git
+
+# copy workflows and node templates
+rclone copy -P ydisk:comfyui-link-source/user ${COMFYUI_DIR}/user
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
