@@ -37,9 +37,6 @@ EOF
 
 git clone https://github.com/xesx/vastai-scripts.git
 
-# copy workflows and node templates
-rclone copy -P ydisk:comfyui-link-source/user ${COMFYUI_DIR}/user
-
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
@@ -48,6 +45,9 @@ function provisioning_start() {
     provisioning_get_nodes
     provisioning_get_pip_packages
     provisioning_print_end
+
+    # copy workflows and node templates
+    rclone copy -P ydisk:comfyui-link-source/user ${COMFYUI_DIR}/user
 }
 
 function provisioning_get_apt_packages() {
