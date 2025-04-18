@@ -45,6 +45,9 @@ function provisioning_start() {
     provisioning_get_nodes
     provisioning_get_pip_packages
     provisioning_print_end
+
+    rclone config reconnect ydisk:
+    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
 }
 
 function provisioning_get_apt_packages() {
