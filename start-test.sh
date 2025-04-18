@@ -28,6 +28,9 @@ NODES=(
     "https://github.com/Fannovel16/comfyui_controlnet_aux"
     "https://github.com/jags111/efficiency-nodes-comfyui"
     "https://github.com/ssitu/ComfyUI_UltimateSDUpscale"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    "https://github.com/Acly/comfyui-inpaint-nodes"
+    "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch"
 )
 
 # Make rclone config
