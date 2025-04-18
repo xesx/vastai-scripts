@@ -57,9 +57,9 @@ echo "⬇️ Загружаем выбранные файлы с сохране�
 
 while IFS= read -r FILE; do
   SRC="${REMOTE}:${REMOTE_PATH}${FILE}"
-  DEST="${LOCAL_DEST}${SELECTED_FOLDER}/${FILE%/*}" # путь без имени файла
-  echo "📥 $SRC → $DEST/"
-  rclone copy -P "$SRC" "$DEST/"
+  DEST="${LOCAL_DEST}${SELECTED_FOLDER}/${FILE}"
+  echo "📥 $SRC → $DEST"
+  rclone copyto -P "$SRC" "$DEST"
 done <<< "$SELECTED_FILES"
 
 echo "✅ Загрузка завершена!"
