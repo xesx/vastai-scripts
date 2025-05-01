@@ -32,13 +32,13 @@ echo "📂 Скачиваем папку: ${REMOTE_PATH}"
 
 # Путь назначения
 DEST_DIR="${LOCAL_DEST}${SELECTED_FOLDER}"
-#mkdir -p "$DEST_DIR"
+mkdir -p "$DEST_DIR"
 
 # Копируем всю папку целиком
 echo "⬇️ Загружаем папку целиком с сохранением структуры..."
 SRC="${REMOTE}:${REMOTE_PATH}"
 DEST="${DEST_DIR}"
 echo "📥 $SRC → $DEST"
-#rclone copy "$SRC" "$DEST" --progress
+rclone copy "$SRC" "$DEST" --progress
 
 echo "✅ Загрузка завершена!"
