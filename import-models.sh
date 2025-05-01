@@ -18,27 +18,36 @@ if [[ ${#FOLDERS[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# Выбор папки через fzf
-SELECTED_FOLDER=$(printf '%s\n' "${FOLDERS[@]}" | \
-  fzf --prompt="📂 Выбери папку: " --header="Enter — скачать папку целиком" --reverse)
+# Мультивыбор папок через fzf
+SELECTED_FOLDERS=$(printf '%s\n' "${FOLDERS[@]}" | \
+  fzf --multi --ansi --marker='++' \
+      --prompt="📂 Выбери папки: " \
+      --header="⇧↑↓ Tab — выбрать, Enter — скачать" \
+      --reverse)
 
-if [[ -z "$SELECTED_FOLDER" ]]; then
+if [[ -z "$SELECTED_FOLDERS" ]]; then
   echo "🚪 Отменено пользователем."
   exit 0
 fi
 
-REMOTE_PATH="${BASE_REMOTE_PATH}${SELECTED_FOLDER}/"
-echo "📂 Скачиваем папку: ${REMOTE_PATH}"
+# Преобразуем вывод в массив (без mapfile для совместимости)
+FOLDERS_SELECTED=()
+while IFS= read -r line; do
+  FOLDERS_SELECTED+=("$line")
+done <<< "$SELECTED_FOLDERS"
 
-# Путь назначения
-DEST_DIR="${LOCAL_DEST}${SELECTED_FOLDER}"
-mkdir -p "$DEST_DIR"
+echo "⬇️ Загружаем выбранные папки с сохранением структуры..."
 
-# Копируем всю папку целиком
-echo "⬇️ Загружаем папку целиком с сохранением структуры..."
-SRC="${REMOTE}:${REMOTE_PATH}"
-DEST="${DEST_DIR}"
-echo "📥 $SRC → $DEST"
-rclone copy "$SRC" "$DEST" --progress
+# Копируем каждую выбранную папку
+for FOLDER in "${FOLDERS_SELECTED[@]}"; do
+  REMOTE_PATH="${BASE_REMOTE_PATH}${FOLDER}/"
+  DEST_DIR="${LOCAL_DEST}${FOLDER}"
 
-echo "✅ Загрузка завершена!"
+  echo "📂 Обрабатываем папку: ${FOLDER}"
+  mkdir -p "$DEST_DIR"
+
+  echo "📥 ${REMOTE}:${REMOTE_PATH} → $DEST_DIR"
+  rclone copy "${REMOTE}:${REMOTE_PATH}" "$DEST_DIR" --progress
+done
+
+echo "✅ Все папки успешно загружены!"
