@@ -53,11 +53,11 @@ if [[ -z "$SELECTED_FILES" ]]; then
   exit 0
 fi
 
-echo "⬇️ Загружаем выбранные файлы с сохранением структуры..."
+echo "⬇️ Загружаем выбранные файлы..."
 
 while IFS= read -r FILE; do
   SRC="${REMOTE}:${REMOTE_PATH}${FILE}"
-  DEST="${LOCAL_DEST}${SELECTED_FOLDER}/${FILE}"
+  DEST=$(pwd)"/${FILE}"
   echo "📥 $SRC → $DEST"
   rclone copyto -P "$SRC" "$DEST"
 done <<< "$SELECTED_FILES"
