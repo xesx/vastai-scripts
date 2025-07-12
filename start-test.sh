@@ -38,10 +38,10 @@ NODES=(
 
 # Make rclone config
 mkdir -p "${RCLONE_CONFIG_DIR}"
-cat > "${RCLONE_CONFIG_FILE}" <<EOF
+cat > rclone.conf <<EOF
 [ydisk]
 type = yandex
-token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refresh_token":"$YANDEX_DISK_REFRESH_TOKEN","expiry":"2025-04-15T14:11:36.588423+03:00"}
+token = {"access_token":"y0__xDOvYOxAhjCpQsg3Pry6RItIzMD7a0X22v_MIqiywpWJKJLBg","token_type":"OAuth","refresh_token":"1:AAA:1:aNGfX04HuISovJDP:veR1zoh4t9iFpCVmve7Wq6vqJBzvf7ZxqCf3Gt3Hkh7ZbjieyqOKrk8SkeXb02Wi4lfD9Dg:B3GSYugTPzXVbOMX_96DIg","expiry":"2026-04-14T16:51:08.975778+03:00"}
 EOF
 
 git clone https://github.com/xesx/vastai-scripts.git

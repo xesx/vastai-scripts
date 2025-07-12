@@ -57,8 +57,13 @@ echo "⬇️ Загружаем выбранные файлы..."
 
 while IFS= read -r FILE; do
   SRC="${REMOTE}:${REMOTE_PATH}${FILE}"
-  DEST=$(pwd)"/${FILE}"
+
+  DEST_DIRECTORY_RELATIVE="${1:-.}"
+  DEST_DIRECTORY_ABSOLUTE=$(realpath "$DEST_DIRECTORY_RELATIVE")
+  DEST=$DEST_DIRECTORY_ABSOLUTE"/${FILE##*/}"
+
   echo "📥 $SRC → $DEST"
+
   rclone copyto -P "$SRC" "$DEST"
 done <<< "$SELECTED_FILES"
 
