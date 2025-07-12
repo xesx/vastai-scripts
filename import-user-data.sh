@@ -1,2 +1,2 @@
 #!/bin/bash
-rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
+rclone copy -P ydisk:shared/comfyui/user /workspace/ComfyUI/user

@@ -31,6 +31,9 @@ NODES=(
     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     "https://github.com/Acly/comfyui-inpaint-nodes"
     "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch"
+    "https://github.com/cubiq/ComfyUI_IPAdapter_plus"
+    "https://github.com/jakechai/ComfyUI-JakeUpgrade"
+    "https://github.com/yolain/ComfyUI-Easy-Use"
 )
 
 # Make rclone config

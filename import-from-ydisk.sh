@@ -2,8 +2,8 @@
 set -e
 
 REMOTE="ydisk"
-BASE_REMOTE_PATH="shared/comfyui/models/"
-LOCAL_DEST="/workspace/ComfyUI/models/"
+BASE_REMOTE_PATH="shared/"
+LOCAL_DEST="."
 
 echo "📁 Сканируем доступные папки..."
 
