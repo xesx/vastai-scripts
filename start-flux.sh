@@ -22,6 +22,7 @@ NODES=(
     "https://github.com/crystian/ComfyUI-Crystools"
     "https://github.com/cubiq/ComfyUI_essentials"
     "https://github.com/twri/sdxl_prompt_styler"
+    "https://github.com/GavChap/ComfyUI-SD3LatentSelectRes"
 )
 
 # Make rclone config
