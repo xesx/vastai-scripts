@@ -1,4 +1,8 @@
 #!/bin/bash
+# Базовые пути
+REMOTE_BASE="ydisk:shared/comfyui/models"
+LOCAL_BASE="/workspace/ComfyUI/models"
+
 # Массив файлов для копирования
 FILES=(
     "clip/clip_l.safetensors"
