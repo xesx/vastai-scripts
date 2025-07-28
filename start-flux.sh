@@ -23,6 +23,14 @@ NODES=(
     "https://github.com/cubiq/ComfyUI_essentials"
     "https://github.com/twri/sdxl_prompt_styler"
     "https://github.com/GavChap/ComfyUI-SD3LatentSelectRes"
+    "https://github.com/pythongosssss/ComfyUI-Custom-Scripts"
+    "https://github.com/rgthree/rgthree-comfy"
+    "https://github.com/yolain/ComfyUI-Easy-Use"
+    "https://github.com/kijai/ComfyUI-KJNodes"
+    "https://github.com/kijai/ComfyUI-Florence2"
+    "https://github.com/Acly/comfyui-inpaint-nodes"
+    "https://github.com/chrisgoringe/cg-use-everywhere"
+    "https://github.com/un-seen/comfyui-tensorops"
 )
 
 # Make rclone config
