@@ -31,6 +31,9 @@ NODES=(
     "https://github.com/Acly/comfyui-inpaint-nodes"
     "https://github.com/chrisgoringe/cg-use-everywhere"
     "https://github.com/un-seen/comfyui-tensorops"
+    "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
+    "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch"
+    "https://github.com/kaibioinfo/ComfyUI_AdvancedRefluxControl"
 )
 
 # Make rclone config
