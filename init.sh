@@ -2,8 +2,9 @@
 
 # Получаем путь к самому исполняемому скрипту
 SCRIPT_PATH="$(realpath "$0")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-TARGET_SCRIPT="$SCRIPT_DIR/import-from-ydisk.sh"
+export VASTAI_SCRIPTS_DIR="$(dirname "$SCRIPT_PATH")"
+
+TARGET_SCRIPT="$VASTAI_SCRIPTS_DIR/import-from-ydisk.sh"
 ALIAS_NAME="yaimport"
 
 # Определяем файл конфигурации shell'а

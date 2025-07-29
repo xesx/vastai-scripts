@@ -34,6 +34,7 @@ NODES=(
     "https://github.com/ltdrdata/ComfyUI-Impact-Pack"
     "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch"
     "https://github.com/kaibioinfo/ComfyUI_AdvancedRefluxControl"
+    "https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet"
 )
 
 # Make rclone config
@@ -48,6 +49,7 @@ EOF
 
 git clone https://github.com/xesx/vastai-scripts.git
 
+source ./vastai-scripts/init.sh
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
