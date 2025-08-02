@@ -1,7 +1,4 @@
 #!/bin/bash
-# Базовые пути
-REMOTE_BASE="ydisk:shared/comfyui/models"
-LOCAL_BASE="/workspace/ComfyUI/models"
 
 # Массив файлов для копирования
 FILES=(
@@ -11,8 +8,6 @@ FILES=(
     "diffusion_models/flux1-fill-dev-FP8.safetensors"
 )
 
-# Копируем каждый файл
-for file in "${FILES[@]}"; do
-    echo "Копирую: $file"
-    rclone copy -P "$REMOTE_BASE/$file" "$LOCAL_BASE/$file"
-done
+# Получаем директорию, где находится скрипт
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/_copy.sh"
