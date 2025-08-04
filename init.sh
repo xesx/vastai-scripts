@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Получаем путь к самому исполняемому скрипту
-SCRIPT_PATH="$(realpath "$0")"
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
 export VASTAI_SCRIPTS_DIR="$(dirname "$SCRIPT_PATH")"
 
 echo "Исполняемый скрипт находится в: $VASTAI_SCRIPTS_DIR"
