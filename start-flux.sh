@@ -35,6 +35,7 @@ NODES=(
     "https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch"
     "https://github.com/kaibioinfo/ComfyUI_AdvancedRefluxControl"
     "https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet"
+    "https://github.com/jags111/efficiency-nodes-comfyui"
 )
 
 # Make rclone config

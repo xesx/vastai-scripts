@@ -4,6 +4,8 @@
 SCRIPT_PATH="$(realpath "$0")"
 export VASTAI_SCRIPTS_DIR="$(dirname "$SCRIPT_PATH")"
 
+echo "Исполняемый скрипт находится в: $VASTAI_SCRIPTS_DIR"
+
 TARGET_SCRIPT="$VASTAI_SCRIPTS_DIR/import-from-ydisk.sh"
 ALIAS_NAME="yaimport"
 
