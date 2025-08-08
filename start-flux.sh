@@ -51,7 +51,7 @@ EOF
 
 git clone https://github.com/xesx/vastai-scripts.git
 
-source ./vastai-scripts/init.sh
+source ${WORKSPACE}/vastai-scripts/init.sh
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
