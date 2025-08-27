@@ -3,7 +3,7 @@
 FILES=(
     "clip/clip_l.safetensors"
     "clip/t5-v1_1-xxl-encoder-Q4_K_S.gguf"
-    "vae/Flux-vae.safetensors"
+    "vae/flux-vae-fp-16.safetensors"
     "diffusion_models/flux1-dev-fp8-e4m3fn.safetensors"
     "clip_vision/flux_clip_vision_patch14_384.safetensors"
     "style_models/flux1-redux-dev.safetensors"

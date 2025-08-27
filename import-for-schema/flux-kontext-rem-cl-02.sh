@@ -2,9 +2,9 @@
 # Массив файлов для копирования
 FILES=(
     "clip/clip_l.safetensors"
-    "clip/t5-v1_1-xxl-encoder-Q4_K_S.gguf"
+    "clip/t5xxl_fp8_e4m3fn.safetensors"
     "vae/flux-vae-fp-16.safetensors"
-    "diffusion_models/flux1-fill-dev-FP8.safetensors"
+    "diffusion_models/flux1-dev-fp8-e4m3fn.safetensors"
 )
 
 source ${VASTAI_SCRIPTS_DIR}/import-for-schema/_copy.sh
