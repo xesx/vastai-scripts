@@ -6,7 +6,7 @@ API_URL="https://us.infisical.com/api/v3/secrets/raw"
 response=$(curl -s -H "Authorization: Bearer $INFISICAL_TOKEN" "$API_URL")
 
 # Проходим по каждому секрету и экспортируем переменную
-echo "$response" | jq -r '.secrets[] | "export \(.secretKey)=\(.secretValue)"' >> ${WORKSPACE}/set_secrets.sh
+echo "$response" | jq -r '.secrets[] | "export \(.secretKey)=\(.secretValue)"' >> ${WORKSPACE}/onstart.sh
 
 # Опционально: показать, что переменные установились
 echo "Секреты загружены:"
