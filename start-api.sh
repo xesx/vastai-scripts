@@ -33,6 +33,10 @@ EOF
 git clone https://github.com/xesx/vastai-scripts.git
 
 source ./vastai-scripts/init.sh
+
+# Запуск rclone API-сервера без авторизации на порту 5572
+nohup rclone rcd --rc-addr=:15572 --rc-no-auth > /var/log/rclone.log 2>&1 &
+
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
