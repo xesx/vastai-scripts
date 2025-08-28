@@ -32,6 +32,9 @@ EOF
 
 git clone https://github.com/xesx/vastai-scripts.git
 
+# Импортируем секреты из Infisical
+source ./vastai-scripts/import-secrets.sh
+
 source ./vastai-scripts/init.sh
 
 # Запуск rclone API-сервера без авторизации на порту 5572
