@@ -6,6 +6,11 @@ COMFYUI_DIR=${WORKSPACE}/ComfyUI
 RCLONE_CONFIG_DIR="${HOME}/.config/rclone"
 RCLONE_CONFIG_FILE="${RCLONE_CONFIG_DIR}/rclone.conf"
 
+git clone https://github.com/xesx/vastai-scripts.git
+
+# Импортируем секреты из Infisical
+source ./vastai-scripts/import-secrets.sh
+
 # Packages are installed after nodes so we can fix them...
 
 APT_PACKAGES=(
@@ -28,12 +33,6 @@ cat > "${RCLONE_CONFIG_FILE}" <<EOF
 type = yandex
 token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refresh_token":"$YANDEX_DISK_REFRESH_TOKEN","expiry":"2025-04-15T14:11:36.588423+03:00"}
 EOF
-
-
-git clone https://github.com/xesx/vastai-scripts.git
-
-# Импортируем секреты из Infisical
-source ./vastai-scripts/import-secrets.sh
 
 source ./vastai-scripts/init.sh
 

@@ -7,6 +7,7 @@ response=$(curl -s -H "Authorization: Bearer $INFISICAL_TOKEN" "$API_URL")
 
 # Проходим по каждому секрету и экспортируем переменную
 echo "$response" | jq -r '.secrets[] | "export \(.secretKey)=\(.secretValue)"' >> ${WORKSPACE}/onstart.sh
+source ${WORKSPACE}/onstart.sh
 
 # Опционально: показать, что переменные установились
 echo "Секреты загружены:"
