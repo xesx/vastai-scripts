@@ -36,8 +36,8 @@ function provisioning_start() {
 
     provisioning_get_apt_packages
 
-    rclone config reconnect ydisk:
-    #    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
+#    rclone config reconnect ydisk:
+#    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
 
     deploy_app_cloud_api
 
