@@ -39,6 +39,8 @@ function provisioning_start() {
     rclone config reconnect ydisk:
     #    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
 
+    deploy_app_cloud_api
+
     printf "\nProvisioning complete:  Application will start now\n\n"
 }
 
@@ -46,6 +48,21 @@ function provisioning_get_apt_packages() {
     if [[ -n $APT_PACKAGES ]]; then
             sudo apt install "${APT_PACKAGES[@]}"
     fi
+}
+
+deploy_app_cloud_api() {
+    cd ${WORKSPACE}/vateco
+
+    # Установка зависимостей
+    npm install
+
+    # Сборка проекта
+    npm run build
+
+    # Запуск приложения cloud-app-api
+    npm run start:cloud-api:prod
+
+    cd ${WORKSPACE}
 }
 
 provisioning_start
