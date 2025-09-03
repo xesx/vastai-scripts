@@ -1,12 +1,13 @@
 #!/bin/bash
 
-source /venv/main/bin/activate
-COMFYUI_DIR=${WORKSPACE}/ComfyUI
+#source /venv/main/bin/activate
+#COMFYUI_DIR=${WORKSPACE}/ComfyUI
 
 RCLONE_CONFIG_DIR="${HOME}/.config/rclone"
 RCLONE_CONFIG_FILE="${RCLONE_CONFIG_DIR}/rclone.conf"
 
 git clone https://github.com/xesx/vastai-scripts.git
+git clone https://github.com/xesx/vateco.git
 
 # Импортируем секреты из Infisical
 source ./vastai-scripts/import-secrets.sh
@@ -14,15 +15,6 @@ source ./vastai-scripts/import-secrets.sh
 # Packages are installed after nodes so we can fix them...
 
 APT_PACKAGES=(
-)
-
-PIP_PACKAGES=(
-    #"package-1"
-    #"package-2"
-)
-
-NODES=(
-    "https://github.com/ltdrdata/ComfyUI-Manager"
 )
 
 # Make rclone config
@@ -34,65 +26,26 @@ type = yandex
 token = {"access_token":"$YANDEX_DISK_ACCESS_TOKEN","token_type":"OAuth","refresh_token":"$YANDEX_DISK_REFRESH_TOKEN","expiry":"2025-04-15T14:11:36.588423+03:00"}
 EOF
 
-source ./vastai-scripts/init.sh
-
 # Запуск rclone API-сервера без авторизации на порту 5572
 nohup rclone rcd --rc-addr=:15572 --rc-no-auth > /var/log/rclone.log 2>&1 &
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
-    provisioning_print_header
+    printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
+
     provisioning_get_apt_packages
-    provisioning_get_nodes
-    provisioning_get_pip_packages
-    provisioning_print_end
 
     rclone config reconnect ydisk:
-    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
+    #    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
+
+    printf "\nProvisioning complete:  Application will start now\n\n"
 }
 
 function provisioning_get_apt_packages() {
     if [[ -n $APT_PACKAGES ]]; then
             sudo apt install "${APT_PACKAGES[@]}"
     fi
-}
-
-function provisioning_get_pip_packages() {
-    if [[ -n $PIP_PACKAGES ]]; then
-            pip install --no-cache-dir "${PIP_PACKAGES[@]}"
-    fi
-}
-
-function provisioning_get_nodes() {
-    for repo in "${NODES[@]}"; do
-        dir="${repo##*/}"
-        path="${COMFYUI_DIR}/custom_nodes/${dir}"
-        requirements="${path}/requirements.txt"
-        if [[ -d $path ]]; then
-            if [[ ${AUTO_UPDATE,,} != "false" ]]; then
-                printf "Updating node: %s...\n" "${repo}"
-                ( cd "$path" && git pull )
-                if [[ -e $requirements ]]; then
-                   pip install --no-cache-dir -r "$requirements"
-                fi
-            fi
-        else
-            printf "Downloading node: %s...\n" "${repo}"
-            git clone "${repo}" "${path}" --recursive
-            if [[ -e $requirements ]]; then
-                pip install --no-cache-dir -r "${requirements}"
-            fi
-        fi
-    done
-}
-
-function provisioning_print_header() {
-    printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
-}
-
-function provisioning_print_end() {
-    printf "\nProvisioning complete:  Application will start now\n\n"
 }
 
 provisioning_start
