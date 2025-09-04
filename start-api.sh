@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#source /venv/main/bin/activate
-#COMFYUI_DIR=${WORKSPACE}/ComfyUI
-
 RCLONE_CONFIG_DIR="${HOME}/.config/rclone"
 RCLONE_CONFIG_FILE="${RCLONE_CONFIG_DIR}/rclone.conf"
 
@@ -29,8 +26,6 @@ EOF
 # Запуск rclone API-сервера без авторизации на порту 5572
 nohup rclone rcd --rc-addr=:15572 --rc-no-auth > /var/log/rclone.log 2>&1 &
 
-### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
-
 function provisioning_start() {
     printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
 
@@ -55,10 +50,6 @@ deploy_app_cloud_api() {
 
     source /opt/nvm/nvm.sh
     nvm use 22
-
-#    which node >> /var/log/provisioning.log 2>&1
-#    which npm >> /var/log/provisioning.log 2>&1
-#    which nvm >> /var/log/provisioning.log 2>&1
 
     # Установка зависимостей
     npm install
