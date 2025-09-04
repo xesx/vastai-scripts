@@ -26,20 +26,6 @@ EOF
 # Запуск rclone API-сервера без авторизации на порту 5572
 nohup rclone rcd --rc-addr=:15572 --rc-no-auth > /var/log/rclone.log 2>&1 &
 
-# Дождёмся, пока rclone API станет доступен
-sleep 5
-
-# Проверим, видит ли rclone диск
-if rclone lsd ydisk:shared --timeout 10s --retries 5 > rclone.log 2>&1; then
-    echo "✅ Yandex Disk доступен"
-else
-    echo "❌ Yandex Disk недоступен. Проверьте токен."
-    tail /var/log/rclone.log
-    exit 1
-fi
-
-nohup rclone copy ydisk:shared/comfyui-portable-cu128-py312-v0.tar.zst ./ > rclone.log 2>&1 &
-
 function provisioning_start() {
     printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
 
