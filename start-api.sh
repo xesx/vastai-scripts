@@ -53,6 +53,8 @@ function provisioning_get_apt_packages() {
 deploy_app_cloud_api() {
     cd ${WORKSPACE}/vateco
 
+    which node
+    which npm
     # Установка зависимостей
     npm install
 
