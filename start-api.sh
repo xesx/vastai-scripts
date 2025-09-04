@@ -60,6 +60,9 @@ deploy_app_cloud_api() {
     # Запуск приложения cloud-app-api
     nohup npm run start:cloud-api:prod > cloud-app-api.log 2>&1 &
 
+    # Запуск приложения cloud-app-cron
+    nohup npm run start:cloud-cron:prod > cloud-app-cron.log 2>&1 &
+
     cd ${WORKSPACE}
 }
 
