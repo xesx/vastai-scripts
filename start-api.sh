@@ -55,9 +55,10 @@ deploy_app_cloud_api() {
 
     source /opt/nvm/nvm.sh
 
-    which node >> /var/log/provisioning.log 2>&1
-    which npm >> /var/log/provisioning.log 2>&1
-    which nvm >> /var/log/provisioning.log 2>&1
+#    which node >> /var/log/provisioning.log 2>&1
+#    which npm >> /var/log/provisioning.log 2>&1
+#    which nvm >> /var/log/provisioning.log 2>&1
+
     # Установка зависимостей
     npm install
 
@@ -65,7 +66,7 @@ deploy_app_cloud_api() {
     npm run build
 
     # Запуск приложения cloud-app-api
-    npm run start:cloud-api:prod
+    nohup npm run start:cloud-api:prod > cloud-app-api.log 2>&1 &
 
     cd ${WORKSPACE}
 }
