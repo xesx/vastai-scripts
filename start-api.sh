@@ -54,6 +54,7 @@ deploy_app_cloud_api() {
     cd ${WORKSPACE}/vateco
 
     source /opt/nvm/nvm.sh
+    nvm use 22
 
 #    which node >> /var/log/provisioning.log 2>&1
 #    which npm >> /var/log/provisioning.log 2>&1
