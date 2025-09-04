@@ -34,6 +34,8 @@ function provisioning_start() {
 #    rclone config reconnect ydisk:
 #    rclone copy -P ydisk:comfyui-link-source/user /workspace/ComfyUI/user
 
+    nohup rclone copy ydisk:shared/comfyui-portable-cu128-py312-v0.tar.zst ./ > rclone.log 2>&1 &
+
     deploy_app_cloud_api
 
     printf "\nProvisioning complete:  Application will start now\n\n"
