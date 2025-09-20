@@ -6,5 +6,10 @@ LOCAL_BASE="/workspace/ComfyUI/models"
 # Копируем каждый файл
 for file in "${FILES[@]}"; do
     echo "Копирую: $file"
-    rclone copy -P "$REMOTE_BASE/$file" "$LOCAL_BASE/$file"
+
+    # Создаём директорию назначения
+    mkdir -p "$LOCAL_BASE/$(dirname "$file")"
+
+    # Копируем файл в папку назначения
+    rclone copy -P "$REMOTE_BASE/$file" "$LOCAL_BASE/$(dirname "$file")"
 done
